@@ -27,7 +27,7 @@ namespace BranchDetails.Action;
 
 internal sealed class BranchDetailsProcessor(ILogger<BranchDetailsProcessor> logger, Context context, ActionInputs inputs, IGitHubService github)
 {
-    private readonly ILogger _logger = logger;
+    private readonly ILogger<BranchDetailsProcessor> _logger = logger;
     private readonly Context _context = context;
     private readonly ActionInputs _inputs = inputs;
     private readonly IGitHubService _github = github;

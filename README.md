@@ -1,5 +1,6 @@
 # GitHub Action: Branch Details
 
+[![build](https://github.com/StevenJDH/branch-details/actions/workflows/dotnet-action-sonar-container-workflow.yml/badge.svg?branch=main)](https://github.com/StevenJDH/branch-details/actions/workflows/dotnet-action-sonar-container-workflow.yml)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/StevenJDH/branch-details?include_prereleases)
 [![Public workflows that use this action.](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fused-by.vercel.app%2Fapi%2Fgithub-actions%2Fused-by%3Faction%3DStevenJDH%2Fbranch-details%26badge%3Dtrue)](https://github.com/search?o=desc&q=StevenJDH+branch-details+language%3AYAML&s=&type=Code)
 ![Maintenance](https://img.shields.io/badge/yes-4FCA21?label=maintained&style=flat)
