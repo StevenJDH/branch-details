@@ -1,0 +1,79 @@
+# This file is part of Branch Details <https://github.com/StevenJDH/branch-details>.
+# Copyright (C) 2024 Steven Jenkins De Haro.
+#
+# Branch Details is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Branch Details is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Branch Details.  If not, see <http://www.gnu.org/licenses/>.
+
+name: 'Branch Details'
+description: 'A GitHub action that exposes information about branches, tags, and related concepts to simplify automation activities.'
+author: StevenJDH
+
+# See branding:
+# https://docs.github.com/actions/creating-actions/metadata-syntax-for-github-actions#branding
+branding:
+  icon: 'git-branch'
+  color: 'gray-dark'
+
+inputs:
+  drop-tag-prefix:
+    description:
+      'Removes the prefix of a tag. For example, dropping the v in v1.0.0 using v, or the more regex style of [vV], as the input.'
+    required: false
+  export-variables:
+    description:
+      'Indicates whether or not to set environment variables for each output exposed by this action for other steps in a job. Format is BD_XXX with all in uppercase. For example, triggering_ref becomes BD_TRIGGERING_REF.'
+    required: false
+    default: 'false'
+  github-token:
+    description:
+      'Overrides the default GitHub token to authenticate API requests.'
+    required: false
+    default: ${{ github.token }}
+
+outputs:
+  triggering_ref:
+    description: 'The fully-formed ref of the branch or tag that triggered the workflow run.'
+  is_tag:
+    description: 'Indicates whether or not triggering_ref is a tag.'
+  is_semver:
+    description: 'Indicates whether or not tag is using semantic versioning. Always false when is_tag is false.'
+  tag:
+    description: 'The tag that triggered the workflow run. Will be empty when is_tag is false.'
+  current_branch_name:
+    description: "The current working branch regardless of event type. Usually same as base_branch_name, but for pull requests, it's same as head_branch_name."
+  is_default_branch:
+    description: 'Indicates whether or not current_branch_name is the default branch.'
+  default_branch_name:
+    description: 'The default branch for the repository.'
+  base_branch_name:
+    description: 'The target branch of a commit, pull request, tag, or other event.'
+  head_branch_name:
+    description: 'The source branch of a pull request, otherwise, it will be empty.'
+  is_pull_request:
+    description: 'Indicates whether or not triggering_ref is a pull request.'
+  pull_request_id:
+    description: 'Id of the pull request. Will be empty when is_pull_request is false.'
+  repo_owner_name:
+    description: 'The username of the user who owns the repository.'
+  repo_name:
+    description: 'The repository name.'
+  event_actor_name:
+    description: 'The username of the user or app that initiated the workflow run or rerun.'
+  is_event_actor_rerun:
+    description: "Indicates whether or not event_actor triggered the workflow rerun. May not always be the same actor for reruns, but uses original actor's privileges for it. Will always be false for first runs."
+  is_event_actor_owner:
+    description: 'Indicates whether or not event_actor is the repo_owner.'
+
+runs:
+  using: 'docker'
+  image: 'docker://ghcr.io/stevenjdh/branch-details:1.0.0'

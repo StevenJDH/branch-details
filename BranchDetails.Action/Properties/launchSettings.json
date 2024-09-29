@@ -1,0 +1,125 @@
+{
+  "profiles": {
+    "BranchDetails (Commit)": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "INPUT_DROP-TAG-PREFIX": "v",
+        "INPUT_EXPORT-VARIABLES": "true",
+        "GITHUB_ACTOR": "StevenJDH",
+        "GITHUB_TRIGGERING_ACTOR": "StevenJDH",
+        "GITHUB_RUN_ATTEMPT": "1",
+        "GITHUB_RUN_ID": "123456",
+        "GITHUB_REF": "refs/heads/test",
+        "GITHUB_BASE_REF": "",
+        "GITHUB_HEAD_REF": "",
+        "GITHUB_REPOSITORY": "StevenJDH/branch-details",
+        "GITHUB_REPOSITORY_OWNER": "StevenJDH",
+        "GITHUB_OUTPUT": "./locals/output.txt",
+        "GITHUB_ENV": "./locals/env.txt",
+        "GITHUB_STEP_SUMMARY": "./locals/summary.txt"
+      }
+    },
+    "BranchDetails (PR)": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "INPUT_DROP-TAG-PREFIX": "v",
+        "INPUT_EXPORT-VARIABLES": "true",
+        "GITHUB_ACTOR": "StevenJDH",
+        "GITHUB_TRIGGERING_ACTOR": "StevenJDH",
+        "GITHUB_RUN_ATTEMPT": "1",
+        "GITHUB_RUN_ID": "123456",
+        "GITHUB_REF": "refs/pull/123/merge",
+        "GITHUB_BASE_REF": "test",
+        "GITHUB_HEAD_REF": "feature/example",
+        "GITHUB_REPOSITORY": "StevenJDH/branch-details",
+        "GITHUB_REPOSITORY_OWNER": "StevenJDH",
+        "GITHUB_OUTPUT": "./locals/output.txt",
+        "GITHUB_ENV": "./locals/env.txt",
+        "GITHUB_STEP_SUMMARY": "./locals/summary.txt"
+      }
+    },
+    "BranchDetails (Tags)": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "INPUT_DROP-TAG-PREFIX": "v",
+        "INPUT_EXPORT-VARIABLES": "true",
+        "GITHUB_ACTOR": "StevenJDH",
+        "GITHUB_TRIGGERING_ACTOR": "StevenJDH",
+        "GITHUB_RUN_ATTEMPT": "1",
+        "GITHUB_RUN_ID": "123456",
+        "GITHUB_REF": "refs/tags/v1.0.0",
+        "GITHUB_BASE_REF": "",
+        "GITHUB_HEAD_REF": "",
+        "GITHUB_REPOSITORY": "StevenJDH/branch-details",
+        "GITHUB_REPOSITORY_OWNER": "StevenJDH",
+        "GITHUB_OUTPUT": "./locals/output.txt",
+        "GITHUB_ENV": "./locals/env.txt",
+        "GITHUB_STEP_SUMMARY": "./locals/summary.txt"
+      }
+    },
+    "Container (Commit)": {
+      "commandName": "Docker",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "INPUT_DROP-TAG-PREFIX": "v",
+        "INPUT_EXPORT-VARIABLES": "true",
+        "GITHUB_ACTOR": "Docker",
+        "GITHUB_TRIGGERING_ACTOR": "Docker",
+        "GITHUB_RUN_ATTEMPT": "1",
+        "GITHUB_RUN_ID": "123456",
+        "GITHUB_REF": "refs/heads/test",
+        "GITHUB_BASE_REF": "",
+        "GITHUB_HEAD_REF": "",
+        "GITHUB_REPOSITORY": "StevenJDH/branch-details",
+        "GITHUB_REPOSITORY_OWNER": "StevenJDH",
+        "GITHUB_OUTPUT": "./locals/output.txt",
+        "GITHUB_ENV": "./locals/env.txt",
+        "GITHUB_STEP_SUMMARY": "./locals/summary.txt"
+      }
+    },
+    "Container (PR)": {
+      "commandName": "Docker",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "INPUT_DROP-TAG-PREFIX": "v",
+        "INPUT_EXPORT-VARIABLES": "true",
+        "GITHUB_ACTOR": "Docker",
+        "GITHUB_TRIGGERING_ACTOR": "Docker",
+        "GITHUB_RUN_ATTEMPT": "1",
+        "GITHUB_RUN_ID": "123456",
+        "GITHUB_REF": "refs/pull/123/merge",
+        "GITHUB_BASE_REF": "test",
+        "GITHUB_HEAD_REF": "feature/example",
+        "GITHUB_REPOSITORY": "StevenJDH/branch-details",
+        "GITHUB_REPOSITORY_OWNER": "StevenJDH",
+        "GITHUB_OUTPUT": "./locals/output.txt",
+        "GITHUB_ENV": "./locals/env.txt",
+        "GITHUB_STEP_SUMMARY": "./locals/summary.txt"
+      }
+    },
+    "Container (Tags)": {
+      "commandName": "Docker",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "INPUT_DROP-TAG-PREFIX": "v",
+        "INPUT_EXPORT-VARIABLES": "true",
+        "GITHUB_ACTOR": "Docker",
+        "GITHUB_TRIGGERING_ACTOR": "Docker",
+        "GITHUB_RUN_ATTEMPT": "1",
+        "GITHUB_RUN_ID": "123456",
+        "GITHUB_REF": "refs/tags/v1.0.0",
+        "GITHUB_BASE_REF": "",
+        "GITHUB_HEAD_REF": "",
+        "GITHUB_REPOSITORY": "StevenJDH/branch-details",
+        "GITHUB_REPOSITORY_OWNER": "StevenJDH",
+        "GITHUB_OUTPUT": "./locals/output.txt",
+        "GITHUB_ENV": "./locals/env.txt",
+        "GITHUB_STEP_SUMMARY": "./locals/summary.txt"
+      }
+    }
+  },
+  "$schema": "http://json.schemastore.org/launchsettings.json"
+}
