@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Branch Details.  If not, see <http://www.gnu.org/licenses/>.
 
-FROM mcr.microsoft.com/dotnet/runtime-deps:8.0-jammy-chiseled AS base
+FROM mcr.microsoft.com/dotnet/runtime-deps:8.0-noble-chiseled AS base
 # Chiseled images use a non-root user by default, so it has to be set explicitly to 'root' to meet GitHub Action requirements.
 # Otherwise, existing non-root 'USER app' or 'USER $APP_UID' can be set, which is part of runtime-deps.
 # References:
