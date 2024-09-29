@@ -19,9 +19,10 @@
 using BranchDetails.Action.Data;
 using BranchDetails.Action.Services;
 using GitHub;
-using GitHub.Octokit.Authentication;
 using GitHub.Octokit.Client;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Kiota.Abstractions.Authentication;
+using GitHub.Octokit.Client.Authentication;
 
 namespace BranchDetails.Action.Extensions;
 
@@ -36,9 +37,8 @@ public static class ServiceCollectionExtensions
         {
             var provider = services.BuildServiceProvider();
             var inputs = provider.GetRequiredService<ActionInputs>();
-            string gitHubToken = inputs.GitHubToken;
-            ArgumentException.ThrowIfNullOrWhiteSpace(gitHubToken);
-            var request = RequestAdapter.Create(new TokenAuthenticationProvider("Octokit.Gen", gitHubToken));
+            var gitHubToken = new TokenProvider(inputs.GitHubToken);
+            var request = RequestAdapter.Create(new BaseBearerTokenAuthenticationProvider(gitHubToken));
             return new GitHubClient(request);
         });
 
