@@ -16,6 +16,9 @@
  * along with Branch Details.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+
+// Ignore Spelling: Sem Ver Validator Versioning
+
 using BranchDetails.Action.Validators;
 
 namespace BranchDetails.Action.Tests.Validators;

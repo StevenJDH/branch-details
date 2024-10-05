@@ -100,11 +100,11 @@ public class BranchDetailsProcessorTests
         var envPairs = LoadPairs(_envFile);
 
         // Assert
-        Assert.That(exitCode, Is.EqualTo(ExitCode.Success));
-        Assert.That(outputPairs, Has.Count.EqualTo(16));
-        Assert.That(envPairs, Has.Count.EqualTo(0));
         Assert.Multiple(() =>
         {
+            Assert.That(exitCode, Is.EqualTo(ExitCode.Success));
+            Assert.That(outputPairs, Has.Count.EqualTo(16));
+            Assert.That(envPairs, Has.Count.EqualTo(0));
             Assert.That(outputPairs.GetValueOrDefault("triggering_ref"), Is.EqualTo("refs/heads/test"));
             Assert.That(outputPairs.GetValueOrDefault("is_tag"), Is.EqualTo(bool.FalseString.ToLower()));
             Assert.That(outputPairs.GetValueOrDefault("is_semver"), Is.EqualTo(bool.FalseString.ToLower()));
@@ -154,11 +154,11 @@ public class BranchDetailsProcessorTests
         var envPairs = LoadPairs(_envFile);
 
         // Assert
-        Assert.That(exitCode, Is.EqualTo(ExitCode.Success));
-        Assert.That(outputPairs, Has.Count.EqualTo(16));
-        Assert.That(envPairs, Has.Count.EqualTo(0));
         Assert.Multiple(() =>
         {
+            Assert.That(exitCode, Is.EqualTo(ExitCode.Success));
+            Assert.That(outputPairs, Has.Count.EqualTo(16));
+            Assert.That(envPairs, Has.Count.EqualTo(0));
             Assert.That(outputPairs.GetValueOrDefault("triggering_ref"), Is.EqualTo("refs/pull/123/merge"));
             Assert.That(outputPairs.GetValueOrDefault("is_tag"), Is.EqualTo(bool.FalseString.ToLower()));
             Assert.That(outputPairs.GetValueOrDefault("is_semver"), Is.EqualTo(bool.FalseString.ToLower()));
@@ -210,12 +210,12 @@ public class BranchDetailsProcessorTests
         var envPairs = LoadPairs(_envFile);
 
         // Assert
-        Assert.That(tagCaptor.Value, Is.EqualTo("v1.0.0"));
-        Assert.That(exitCode, Is.EqualTo(ExitCode.Success));
-        Assert.That(outputPairs, Has.Count.EqualTo(16));
-        Assert.That(envPairs, Has.Count.EqualTo(0));
         Assert.Multiple(() =>
         {
+            Assert.That(tagCaptor.Value, Is.EqualTo("v1.0.0"));
+            Assert.That(exitCode, Is.EqualTo(ExitCode.Success));
+            Assert.That(outputPairs, Has.Count.EqualTo(16));
+            Assert.That(envPairs, Has.Count.EqualTo(0));
             Assert.That(outputPairs.GetValueOrDefault("triggering_ref"), Is.EqualTo("refs/tags/v1.0.0"));
             Assert.That(outputPairs.GetValueOrDefault("is_tag"), Is.EqualTo(bool.TrueString.ToLower()));
             Assert.That(outputPairs.GetValueOrDefault("is_semver"), Is.EqualTo(bool.TrueString.ToLower()));
@@ -264,11 +264,11 @@ public class BranchDetailsProcessorTests
         var envPairs = LoadPairs(_envFile);
 
         // Assert
-        Assert.That(exitCode, Is.EqualTo(ExitCode.Success));
-        Assert.That(outputPairs, Has.Count.EqualTo(16));
-        Assert.That(envPairs, Has.Count.EqualTo(16));
         Assert.Multiple(() =>
         {
+            Assert.That(exitCode, Is.EqualTo(ExitCode.Success));
+            Assert.That(outputPairs, Has.Count.EqualTo(16));
+            Assert.That(envPairs, Has.Count.EqualTo(16));
             Assert.That(envPairs.GetValueOrDefault("BD_TRIGGERING_REF"), Is.EqualTo("refs/heads/test"));
             Assert.That(envPairs.GetValueOrDefault("BD_IS_TAG"), Is.EqualTo(bool.FalseString.ToLower()));
             Assert.That(envPairs.GetValueOrDefault("BD_IS_SEMVER"), Is.EqualTo(bool.FalseString.ToLower()));
@@ -341,11 +341,15 @@ public class BranchDetailsProcessorTests
         var envPairs = LoadPairs(_envFile);
         string summary = await File.ReadAllTextAsync(_summaryFile);
 
+
         // Assert
-        Assert.That(exitCode, Is.EqualTo(ExitCode.Success));
-        Assert.That(outputPairs, Has.Count.EqualTo(16));
-        Assert.That(envPairs, Has.Count.EqualTo(0));
-        Assert.That(summary, Is.EqualTo(expectedSummary));
+        Assert.Multiple(() =>
+        {
+            Assert.That(exitCode, Is.EqualTo(ExitCode.Success));
+            Assert.That(outputPairs, Has.Count.EqualTo(16));
+            Assert.That(envPairs, Has.Count.EqualTo(0));
+            Assert.That(summary, Is.EqualTo(expectedSummary));
+        });
     }
 
     [Test, Description("Should return failure status when an exception is thrown.")]
@@ -379,19 +383,21 @@ public class BranchDetailsProcessorTests
         string summary = await File.ReadAllTextAsync(_summaryFile);
 
         // Assert
-        Assert.That(exitCode, Is.EqualTo(ExitCode.Failure));
-        Assert.That(outputPairs, Has.Count.EqualTo(0));
-        Assert.That(envPairs, Has.Count.EqualTo(0));
-        Assert.That(summary, Is.EqualTo(string.Empty));
         Assert.Multiple(() =>
         {
+            Assert.That(exitCode, Is.EqualTo(ExitCode.Failure));
+            Assert.That(outputPairs, Has.Count.EqualTo(0));
+            Assert.That(envPairs, Has.Count.EqualTo(0));
+            Assert.That(summary, Is.EqualTo(string.Empty));
             Assert.That(logger.GetLogMessages(), Has.Count.EqualTo(2));
             Assert.That(logger.GetLogMessages(), Contains.Item((LogLevel.Information, EXPECTED_START_PROCESSING_MESSAGE)));
             Assert.That(logger.GetLogMessages(), Contains.Item((LogLevel.Error, expectedErrorMessage)));
         });
     }
 
+#pragma warning disable CA1859 // Use concrete types when possible for improved performance
     private static IReadOnlyDictionary<string, string> LoadPairs(string path)
+#pragma warning restore CA1859 // Use concrete types when possible for improved performance
     {
         var pairs = new Dictionary<string, string>();
         using var reader = new StreamReader(path);

@@ -22,6 +22,8 @@ using GitHub.Models;
 
 namespace BranchDetails.Action.Services;
 
+// Class not testable due to GitHubClient's non-overridable
+// members (WithRefItemRequestBuilder.GetAsync) not being mockable.
 internal class GitHubService(GitHubClient github, Context context) : IGitHubService
 {
     private readonly GitHubClient _github = github;

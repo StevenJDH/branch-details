@@ -45,13 +45,6 @@ public class ServiceCollectionExtensionsTests
     [OneTimeTearDown]
     public void TearDown()
     {
-        Environment.SetEnvironmentVariable("INPUT_GITHUB-TOKEN", null);
-        Environment.SetEnvironmentVariable("GITHUB_ACTOR", null);
-        Environment.SetEnvironmentVariable("GITHUB_REPOSITORY_OWNER", null);
-        Environment.SetEnvironmentVariable("GITHUB_REPOSITORY", null);
-        Environment.SetEnvironmentVariable("GITHUB_OUTPUT", null);
-        Environment.SetEnvironmentVariable("GITHUB_BASE_REF", null);
-        Environment.SetEnvironmentVariable("GITHUB_REF", null);
         File.Delete(_outputFile);
     }
 
