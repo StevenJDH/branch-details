@@ -1,0 +1,26 @@
+name: 'checkout-specific-branch'
+
+on:
+  pull_request:
+    branches:
+    - main
+    types: [opened, synchronize, reopened]
+
+jobs:
+  checkout-specific-branch:
+    name: Checkout Specific Branch
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Set Branch Outputs
+      id: branch-details
+      uses: stevenjdh/branch-details@v1
+      with:
+        export-variables: true
+
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{ steps.branch-details.outputs.head_branch_name }}
+    
+    - name: Confirmation
+      run: echo "Source branch '$BD_HEAD_BRANCH_NAME' was checked out."

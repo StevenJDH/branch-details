@@ -1,0 +1,58 @@
+name: 'conditional-logic'
+
+on:
+  push:
+    branches:
+    - '*'
+    tags:
+    - '*'
+  pull_request:
+    branches:
+    - '*'
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'The reason for running the workflow.'
+        required: true
+        default: 'Manual run'
+
+jobs:
+  conditional-logic:
+    name: Conditional Logic
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set Branch Outputs
+      id: branch-details
+      uses: stevenjdh/branch-details@v1
+      with:
+        export-variables: true
+    
+    - name: Test if the repo owner triggered a rerun
+      if: steps.branch-details.outputs.is_event_actor_rerun == 'true' && steps.branch-details.outputs.is_event_actor_owner == 'true'
+      run: echo "The repo owner '${{ steps.branch-details.outputs.event_actor_name }}' triggered a rerun."
+    
+    - name: Test if non-repo owner or an app triggered a rerun
+      if: steps.branch-details.outputs.is_event_actor_rerun == 'true' && steps.branch-details.outputs.is_event_actor_owner == 'false'
+      run: echo "A non-repo owner or app identified as '$BD_EVENT_ACTOR_NAME' triggered a rerun."
+    
+    - name: Test for commit to non-default branch
+      if: steps.branch-details.outputs.is_pull_request == 'false' && steps.branch-details.outputs.is_tag == 'false' && steps.branch-details.outputs.is_default_branch == 'false'
+      run: |
+        echo "A commit was made to non-default branch '$BD_CURRENT_BRANCH_NAME'."
+        exit 1
+    
+    - name: Test for SemVer Tag
+      if: steps.branch-details.outputs.is_tag == 'true' && steps.branch-details.outputs.is_semver == 'false'
+      run: |
+        echo "The tag '$BD_TAG' doesn't conform to semantic versioning."
+        exit 1
+    
+    - name: Test if PR to non-default branch
+      if: steps.branch-details.outputs.is_pull_request == 'true' && steps.branch-details.outputs.base_branch_name != steps.branch-details.outputs.default_branch_name
+      run: |
+        echo "A non-default branch '$BD_BASE_BRANCH_NAME' recieved a PR request."
+        exit 1
