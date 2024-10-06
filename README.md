@@ -11,6 +11,7 @@
 [![Sonar Violations (long format)](https://img.shields.io/sonar/violations/StevenJDH_branch-details?format=long&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/dashboard?id=StevenJDH_branch-details)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=StevenJDH_branch-details&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=StevenJDH_branch-details)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=StevenJDH_branch-details&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=StevenJDH_branch-details)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=StevenJDH_branch-details&metric=coverage)](https://sonarcloud.io/summary/new_code?id=StevenJDH_branch-details)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=StevenJDH_branch-details&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=StevenJDH_branch-details)
 ![Maintenance](https://img.shields.io/badge/yes-4FCA21?label=maintained&style=flat)
 ![GitHub](https://img.shields.io/github/license/StevenJDH/branch-details)
