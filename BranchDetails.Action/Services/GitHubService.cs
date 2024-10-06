@@ -18,12 +18,13 @@
 
 using BranchDetails.Action.Data;
 using GitHub;
-using GitHub.Models;
 
 namespace BranchDetails.Action.Services;
 
-// Class not testable due to GitHubClient's non-overridable
-// members (WithRefItemRequestBuilder.GetAsync) not being mockable.
+/// <remarks>
+/// Class not testable due to GitHubClient's non-overridable
+/// members (WithRefItemRequestBuilder.GetAsync) not being mockable.
+/// </remarks>>
 internal class GitHubService(GitHubClient github, Context context) : IGitHubService
 {
     private readonly GitHubClient _github = github;
@@ -31,26 +32,6 @@ internal class GitHubService(GitHubClient github, Context context) : IGitHubServ
     private readonly string _repo = context.Repository.Split("/")[^1];
 
     /// <inheritdoc />
-    public async ValueTask<string?> GetTaggedBranchAsync(string? tag)
-    {
-        ArgumentException.ThrowIfNullOrWhiteSpace(tag);
-
-        var gitRef = await GetTagRefAsync(tag);
-
-        if (gitRef is {Ref: not null} && gitRef.Ref.StartsWith("refs/heads/"))
-        {
-            return gitRef.Ref.Split("/")[^1];
-        }
-
-        return await GetDefaultBranchAsync();
-    }
-
-    private async ValueTask<GitRef?> GetTagRefAsync(string tag)
-    {
-        var gitRefs = await _github.Repos[_repoOwner][_repo].Git.MatchingRefs[tag].GetAsync();
-        return gitRefs?.Find(i => i.Ref?.EndsWith(tag) ?? false);
-    }
-
     public async ValueTask<string?> GetDefaultBranchAsync()
     {
         var response = await _github.Repos[_repoOwner][_repo].GetAsync();

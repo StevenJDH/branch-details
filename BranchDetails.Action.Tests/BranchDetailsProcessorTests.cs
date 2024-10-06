@@ -196,12 +196,9 @@ public class BranchDetailsProcessorTests
         var inputs = new ActionInputs();
         var logger = new NullLogger<BranchDetailsProcessor>();
         var mockGitHubService = new Mock<IGitHubService>();
-        var tagCaptor = new ArgumentCaptor<string>();
         var processor = new BranchDetailsProcessor(logger, ctx, inputs, mockGitHubService.Object);
 
         mockGitHubService.Setup(x => x.GetDefaultBranchAsync())
-            .ReturnsAsync("test");
-        mockGitHubService.Setup(x => x.GetTaggedBranchAsync(tagCaptor.Capture()))
             .ReturnsAsync("test");
 
         // Act
@@ -212,7 +209,6 @@ public class BranchDetailsProcessorTests
         // Assert
         Assert.Multiple(() =>
         {
-            Assert.That(tagCaptor.Value, Is.EqualTo("v1.0.0"));
             Assert.That(exitCode, Is.EqualTo(ExitCode.Success));
             Assert.That(outputPairs, Has.Count.EqualTo(16));
             Assert.That(envPairs, Has.Count.EqualTo(0));
@@ -373,7 +369,7 @@ public class BranchDetailsProcessorTests
         var processor = new BranchDetailsProcessor(logger, ctx, inputs, mockGitHubService.Object);
         string expectedErrorMessage = "This is a test error message.";
 
-        mockGitHubService.Setup(x => x.GetTaggedBranchAsync(It.IsAny<string>()))
+        mockGitHubService.Setup(x => x.GetDefaultBranchAsync())
             .Throws(new ArgumentException(expectedErrorMessage));
 
         // Act

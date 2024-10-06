@@ -41,6 +41,7 @@ internal sealed class BranchDetailsProcessor(ILogger<BranchDetailsProcessor> log
             bool isPR = _context.Ref.StartsWith("refs/pull/");
             bool isTag = _context.Ref.StartsWith("refs/tags/");
             bool isSemVer = false;
+            string? defaultBranchName = await _github.GetDefaultBranchAsync();
             string? tag = null;
             string? targetBranchName;
             string? sourceBranchName = null;
@@ -53,7 +54,7 @@ internal sealed class BranchDetailsProcessor(ILogger<BranchDetailsProcessor> log
                 string originalTag = _context.Ref.Split("/")[^1];
                 tag = Regex.Replace(originalTag, pattern, "");
                 isSemVer = SemVerValidator.IsValid(tag);
-                targetBranchName = await _github.GetTaggedBranchAsync(originalTag);
+                targetBranchName = defaultBranchName; // Future update will guess tagged branch like 'git branch --contains mytag'.
                 currentBranchName = targetBranchName;
             }
             else if (isPR)
@@ -69,12 +70,10 @@ internal sealed class BranchDetailsProcessor(ILogger<BranchDetailsProcessor> log
                 currentBranchName = targetBranchName;
             }
 
-            string? defaultBranchName = await _github.GetDefaultBranchAsync();
             bool isDefaultBranch = currentBranchName?.Equals(defaultBranchName, StringComparison.InvariantCultureIgnoreCase) ?? false;
             string owner = _context.RepositoryOwner;
             bool isRerun = _context.RunAttempt > 1;
             string eventActor = isRerun ? _context.TriggeringActor.ToLower() : _context.Actor.ToLower();
-
             IReadOnlyList<string> columns = ["Name", "Value"];
 
             IReadOnlyList<IReadOnlyList<string>> rows =

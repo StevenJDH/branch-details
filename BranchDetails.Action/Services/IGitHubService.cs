@@ -21,12 +21,8 @@ namespace BranchDetails.Action.Services;
 internal interface IGitHubService
 {
     /// <summary>
-    /// Tags on commits aren't associated to branches, so their references are refs/tags/[tag] and we can assume default branch. However,
-    /// if the tag is on a commit that is associated with a branch, their references will be refs/heads/[branch].
+    /// Gets the default branch name for the indicated repository.
     /// </summary>
-    /// <param name="tag"></param>
-    /// <returns></returns>
-    ValueTask<string?> GetTaggedBranchAsync(string? tag);
-
+    /// <returns>Default branch name.</returns>
     ValueTask<string?> GetDefaultBranchAsync();
 }
