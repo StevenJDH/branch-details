@@ -15,8 +15,8 @@
 		<Copyright>Copyright © 2024</Copyright>
 		<Authors>Steven Jenkins De Haro</Authors>
 		<Version>1.0.0</Version>
-		<AssemblyVersion>1.0.0.24091</AssemblyVersion>
-		<FileVersion>1.0.0.24091</FileVersion>
+		<AssemblyVersion>1.0.0.24101</AssemblyVersion>
+		<FileVersion>1.0.0.24101</FileVersion>
 		<RepositoryUrl>https://github.com/StevenJDH/branch-details</RepositoryUrl>
 		<NoWarn>CA2254</NoWarn>
 		<UserSecretsId>52fa3310-d8b3-4307-90e8-d9135be0b971</UserSecretsId>
