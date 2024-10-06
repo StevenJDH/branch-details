@@ -27,17 +27,17 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 # Install clang/zlib1g-dev dependencies for publishing to native.
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-    clang zlib1g-dev
+    clang zlib1g-dev && apt-get clean
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY . .
 # Comment this line out if building from action.yml file to handle differences in build context.
 WORKDIR "/src/BranchDetails.Action"
-RUN chmod +x ./Locals/test-action && dotnet build -c $BUILD_CONFIGURATION -o /app/build
+RUN chmod +x ./Locals/test-action && dotnet build -c "$BUILD_CONFIGURATION" -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=true
+RUN dotnet publish -c "$BUILD_CONFIGURATION" -o /app/publish /p:UseAppHost=true
 
 FROM base AS final
 COPY --from=publish /app/publish .

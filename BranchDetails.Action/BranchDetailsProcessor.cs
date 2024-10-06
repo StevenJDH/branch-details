@@ -52,7 +52,7 @@ internal sealed class BranchDetailsProcessor(ILogger<BranchDetailsProcessor> log
             {
                 string pattern = @$"^{_inputs.DropTagPrefix}";
                 string originalTag = _context.Ref.Split("/")[^1];
-                tag = Regex.Replace(originalTag, pattern, "");
+                tag = Regex.Replace(originalTag, pattern, "", RegexOptions.None, TimeSpan.FromMinutes(1));
                 isSemVer = SemVerValidator.IsValid(tag);
                 targetBranchName = defaultBranchName; // Future update will guess tagged branch like 'git branch --contains mytag'.
                 currentBranchName = targetBranchName;
