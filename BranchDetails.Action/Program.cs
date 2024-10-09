@@ -28,7 +28,7 @@ using var host = Host.CreateDefaultBuilder(args)
     .Build();
 
 Console.WriteLine($"""
-    Branch Details 1.0.0.24101
+    Branch Details 1.0.1.24102
     Copyright (C) 2024{(DateTime.Now.Year.Equals(2024) ? "" : $"-{DateTime.Now.Year}")} Steven Jenkins De Haro
     
     """);

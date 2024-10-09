@@ -75,8 +75,12 @@ internal static class Core
     /// <returns>A readonly list of passed arguments.</returns>
     public static async ValueTask<IReadOnlyList<string>> SetOutputAsync(string name, string value)
     {
-        await IssueFileCommand("OUTPUT", $"{name.Trim()}={value.Trim()}");
-        return [name, value];
+        string outputName = name.Trim();
+        string outputValue = value.Trim();
+
+        await IssueFileCommand("OUTPUT", $"{outputName}={outputValue}");
+
+        return [outputName, outputValue];
     }
 
     /// <summary>
@@ -87,8 +91,12 @@ internal static class Core
     /// <returns>A readonly list of passed arguments.</returns>
     public static async ValueTask<IReadOnlyList<string>> ExportVariableAsync(string name, string value)
     {
-        await IssueFileCommand("ENV", $"{name.Trim()}={value.Trim()}");
-        return [name, value];
+        string envName = name.Trim();
+        string envValue = value.Trim();
+
+        await IssueFileCommand("ENV", $"{envName}={envValue}");
+        
+        return [envName, envValue];
     }
 
     public static async ValueTask SetStepSummaryAsync(string markdown)

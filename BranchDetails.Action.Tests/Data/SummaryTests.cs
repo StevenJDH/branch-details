@@ -63,9 +63,9 @@ public class SummaryTests
 
         var exception = Assert.Throws<ArgumentException>(() => summary.AppendHeader("Test Title", level));
 
-        Assert.That(exception, Is.Not.Null);
         Assert.Multiple(() =>
         {
+            Assert.That(exception, Is.Not.Null);
             Assert.That(exception!.Message, Is.EqualTo(expectedMessage));
             Assert.That(exception.InnerException, Is.Null);
         });
@@ -113,9 +113,9 @@ public class SummaryTests
 
         var exception = Assert.Throws<ArgumentException>(() => summary.AppendTable(columns, rows));
 
-        Assert.That(exception, Is.Not.Null);
         Assert.Multiple(() =>
         {
+            Assert.That(exception, Is.Not.Null);
             Assert.That(exception!.Message, Is.EqualTo(expectedMessage));
             Assert.That(exception.InnerException, Is.Null);
         });
@@ -130,10 +130,10 @@ public class SummaryTests
         string expectedMessage = "At least one column is required. (Parameter 'columns')";
 
         var exception = Assert.Throws<ArgumentException>(() => summary.AppendTable(columns, rows));
-
-        Assert.That(exception, Is.Not.Null);
+        
         Assert.Multiple(() =>
         {
+            Assert.That(exception, Is.Not.Null);
             Assert.That(exception!.Message, Is.EqualTo(expectedMessage));
             Assert.That(exception.InnerException, Is.Null);
         });
@@ -149,9 +149,9 @@ public class SummaryTests
 
         var exception = Assert.Throws<ArgumentException>(() => summary.AppendTable(columns, rows));
 
-        Assert.That(exception, Is.Not.Null);
         Assert.Multiple(() =>
         {
+            Assert.That(exception, Is.Not.Null);
             Assert.That(exception!.Message, Is.EqualTo(expectedMessage));
             Assert.That(exception.InnerException, Is.Null);
         });
@@ -166,10 +166,10 @@ public class SummaryTests
         string expectedMessage = "At least one row is required. (Parameter 'rows')";
 
         var exception = Assert.Throws<ArgumentException>(() => summary.AppendTable(columns, rows));
-
-        Assert.That(exception, Is.Not.Null);
+        
         Assert.Multiple(() =>
         {
+            Assert.That(exception, Is.Not.Null);
             Assert.That(exception!.Message, Is.EqualTo(expectedMessage));
             Assert.That(exception.InnerException, Is.Null);
         });
@@ -185,9 +185,9 @@ public class SummaryTests
 
         var exception = Assert.Throws<ArgumentException>(() => summary.AppendTable(columns, rows));
 
-        Assert.That(exception, Is.Not.Null);
         Assert.Multiple(() =>
         {
+            Assert.That(exception, Is.Not.Null);
             Assert.That(exception!.Message, Is.EqualTo(expectedMessage));
             Assert.That(exception.InnerException, Is.Null);
         });
