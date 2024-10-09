@@ -16,21 +16,27 @@
  * along with Branch Details.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using BranchDetails.Action.Data;
-using GitHub;
+using System.Reflection;
 
-namespace BranchDetails.Action.Services;
+namespace BranchDetails.Action.Tests;
 
-internal class GitHubService(GitHubClient github, Context context) : IGitHubService
+[TestFixture]
+internal class ProgramTests
 {
-    private readonly GitHubClient _github = github;
-    private readonly string _repoOwner = context.RepositoryOwner;
-    private readonly string _repo = context.Repository.Split("/")[^1];
-
-    /// <inheritdoc />
-    public async ValueTask<string?> GetDefaultBranchAsync()
+    [OneTimeSetUp]
+    public void OneTimeSetUp()
     {
-        var response = await _github.Repos[_repoOwner][_repo].GetAsync();
-        return response?.DefaultBranch;
+        Environment.SetEnvironmentVariable("INPUT_GITHUB-TOKEN", null);
+    }
+
+    [Test, Description("Should load and throw ArgumentException when no access token is provided.")]
+    public void Should_LoadAndThrowArgumentException_When_NoAccessTokenIsProvided()
+    {
+        var program = typeof(Program).GetTypeInfo();
+        var mainMethod = program.DeclaredMethods.Single(m => m.Name == "<Main>$");
+        const string expectedMessage = "accessToken";
+
+        Assert.That(async () => await (Task<int>)mainMethod.Invoke(null, [Array.Empty<string>()])!, Throws.ArgumentException
+            .With.Message.EqualTo(expectedMessage));
     }
 }

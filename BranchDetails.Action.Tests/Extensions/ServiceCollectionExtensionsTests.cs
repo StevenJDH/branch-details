@@ -30,7 +30,7 @@ public class ServiceCollectionExtensionsTests
     private readonly string _outputFile = Path.Combine(Directory.GetCurrentDirectory(), "output.txt");
 
     [OneTimeSetUp]
-    public void SetUp()
+    public void OneTimeSetUp()
     {
         File.Create(_outputFile).Dispose();
         Environment.SetEnvironmentVariable("GITHUB_REF", "refs/heads/test");
@@ -43,7 +43,7 @@ public class ServiceCollectionExtensionsTests
     }
 
     [OneTimeTearDown]
-    public void TearDown()
+    public void OneTimeTearDown()
     {
         File.Delete(_outputFile);
     }
@@ -55,10 +55,14 @@ public class ServiceCollectionExtensionsTests
         var provider = services
             .AddGitHubActionServices()
             .BuildServiceProvider();
+
         var ctx = provider.GetService<Context>();
 
-        Assert.That(ctx, Is.Not.Null);
-        Assert.That(ctx, Is.InstanceOf<Context>());
+        Assert.Multiple(() =>
+        {
+            Assert.That(ctx, Is.Not.Null);
+            Assert.That(ctx, Is.InstanceOf<Context>());
+        });
     }
 
     [Test, Description("Should add action inputs for dependency injection.")]
@@ -68,10 +72,14 @@ public class ServiceCollectionExtensionsTests
         var provider = services
             .AddGitHubActionServices()
             .BuildServiceProvider();
+
         var inputs = provider.GetService<ActionInputs>();
 
-        Assert.That(inputs, Is.Not.Null);
-        Assert.That(inputs, Is.InstanceOf<ActionInputs>());
+        Assert.Multiple(() =>
+        {
+            Assert.That(inputs, Is.Not.Null);
+            Assert.That(inputs, Is.InstanceOf<ActionInputs>());
+        });
     }
 
     [Test, Description("Should add GitHub client for dependency injection.")]
@@ -81,10 +89,14 @@ public class ServiceCollectionExtensionsTests
         var provider = services
             .AddGitHubActionServices()
             .BuildServiceProvider();
+
         var client = provider.GetService<GitHubClient>();
 
-        Assert.That(client, Is.Not.Null);
-        Assert.That(client, Is.InstanceOf<GitHubClient>());
+        Assert.Multiple(() =>
+        {
+            Assert.That(client, Is.Not.Null);
+            Assert.That(client, Is.InstanceOf<GitHubClient>());
+        });
     }
 
     [Test, Description("Should add GitHub Service for dependency injection.")]
@@ -94,10 +106,14 @@ public class ServiceCollectionExtensionsTests
         var provider = services
             .AddGitHubActionServices()
             .BuildServiceProvider();
+
         var github = provider.GetService<IGitHubService>();
 
-        Assert.That(github, Is.Not.Null);
-        Assert.That(github, Is.InstanceOf<IGitHubService>());
+        Assert.Multiple(() =>
+        {
+            Assert.That(github, Is.Not.Null);
+            Assert.That(github, Is.InstanceOf<IGitHubService>());
+        });
     }
 
     [Test, Description("Should add branch name processor for dependency injection.")]
@@ -108,9 +124,13 @@ public class ServiceCollectionExtensionsTests
             .AddLogging()
             .AddGitHubActionServices()
             .BuildServiceProvider();
+
         var processor = provider.GetService<BranchDetailsProcessor>();
 
-        Assert.That(processor, Is.Not.Null);
-        Assert.That(processor, Is.InstanceOf<BranchDetailsProcessor>());
+        Assert.Multiple(() =>
+        {
+            Assert.That(processor, Is.Not.Null);
+            Assert.That(processor, Is.InstanceOf<BranchDetailsProcessor>());
+        });
     }
 }
